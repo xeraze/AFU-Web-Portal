@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Збройні Сили України | Твоя перемога починається тут</title>
+    <title>ЗСУ | Веб-Портал</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --vsu-dark: #0d0e0d;
             --vsu-green: #2d3321;
             --vsu-gold: #c5a059;
+            --vsu-gold-glow: rgba(197, 160, 89, 0.4);
             --vsu-border: #3d4530;
             --text-white: #e0e0e0;
             --text-gray: #a0a0a0;
@@ -18,7 +19,6 @@
         * {
             margin: 0; padding: 0; box-sizing: border-box;
             font-family: 'Montserrat', sans-serif;
-            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -37,19 +37,22 @@
             transform: translateY(0);
         }
 
-        .gold-glow {
-            color: var(--vsu-gold) !important;
-            text-shadow: 0 0 15px rgba(197, 160, 89, 0.3);
+        .vsu-icon {
+            fill: var(--vsu-gold);
+            filter: drop-shadow(0 0 8px var(--vsu-gold-glow));
+            display: inline-block;
+            vertical-align: middle;
         }
 
         .tactical-frame {
             position: relative;
             border: 1px solid var(--vsu-border);
             padding: 10px;
-            background: rgba(45, 51, 33, 0.1);
+            background: rgba(45, 51, 33, 0.05);
+            margin: 40px auto;
         }
         .tactical-frame::before, .tactical-frame::after {
-            content: ''; position: absolute; width: 20px; height: 20px;
+            content: ''; position: absolute; width: 30px; height: 30px;
             border: 2px solid var(--vsu-gold);
         }
         .tactical-frame::before { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
@@ -57,142 +60,129 @@
 
         .header {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 5%; background: rgba(13, 14, 13, 0.95);
+            padding: 15px 5%; background: rgba(13, 14, 13, 0.9);
             border-bottom: 1px solid var(--vsu-border);
-            position: fixed; top: 0; width: 100%; z-index: 1000; backdrop-filter: blur(10px);
+            position: fixed; top: 0; width: 100%; z-index: 1000; backdrop-filter: blur(15px);
         }
-        .logo { font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: #fff; text-decoration: none; }
+        .logo { 
+            font-weight: 900; text-transform: uppercase; letter-spacing: 2px; 
+            color: #fff; text-decoration: none; display: flex; align-items: center; gap: 10px;
+        }
 
-        .hero {
-            padding: 150px 5% 80px;
-            min-height: 100vh;
-            display: flex; flex-direction: column; align-items: center; text-align: center;
-        }
-        .hero-title {
-            font-size: clamp(40px, 8vw, 95px);
-            font-weight: 900; text-transform: uppercase; line-height: 0.9;
-            margin-bottom: 20px;
-        }
         .btn-vsu {
             background: var(--vsu-green);
             color: white; border: 1px solid var(--vsu-gold);
-            padding: 20px 40px; font-weight: 900; text-transform: uppercase;
+            padding: 18px 35px; font-weight: 900; text-transform: uppercase;
             cursor: pointer; text-decoration: none; transition: 0.3s;
-            display: inline-block; margin-top: 30px;
+            display: inline-flex; align-items: center; gap: 12px;
         }
         .btn-vsu:hover { background: var(--vsu-gold); color: black; }
+        .btn-vsu:hover .vsu-icon { fill: black; filter: none; }
 
-        .spec-section { padding: 100px 5%; max-width: 1200px; margin: 0 auto; }
-        .section-tag { color: var(--vsu-gold); text-transform: uppercase; letter-spacing: 4px; font-size: 14px; margin-bottom: 10px; display: block; }
-        
+        .hero { padding: 180px 5% 100px; text-align: center; min-height: 100vh; }
+        .hero-title {
+            font-size: clamp(35px, 8vw, 90px);
+            font-weight: 900; text-transform: uppercase; line-height: 0.85; margin-bottom: 25px;
+        }
+        .gold-text { color: var(--vsu-gold); text-shadow: 0 0 20px var(--vsu-gold-glow); }
+
         .spec-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px; margin-top: 50px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px; padding: 100px 5%; max-width: 1300px; margin: 0 auto;
         }
         .spec-card {
-            background: #151812;
-            border: 1px solid var(--vsu-border);
-            padding: 40px; text-align: center;
-            transition: 0.4s;
+            background: #11130f; border: 1px solid var(--vsu-border);
+            padding: 50px 30px; text-align: center; transition: 0.4s;
         }
         .spec-card:hover { border-color: var(--vsu-gold); transform: translateY(-10px); }
-        .spec-card .icon { font-size: 45px; margin-bottom: 20px; display: block; }
-        .spec-card h3 { text-transform: uppercase; margin-bottom: 15px; font-size: 20px; }
+        .spec-card h3 { text-transform: uppercase; margin: 20px 0 15px; font-size: 18px; letter-spacing: 1px; }
+        
         .btn-small {
             border: 1px solid var(--vsu-gold); color: var(--vsu-gold);
-            padding: 10px 20px; font-size: 12px; text-decoration: none; text-transform: uppercase;
+            padding: 10px 20px; font-size: 11px; text-decoration: none; text-transform: uppercase; font-weight: 700;
         }
 
-        .footer {
-            border-top: 1px solid var(--vsu-border);
-            padding: 60px 5%; margin-top: 100px; background: #080908;
-        }
-        .footer-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
-        .footer-logo { font-weight: 900; text-transform: uppercase; font-size: 20px; }
-
+        .footer { padding: 80px 5%; border-top: 1px solid var(--vsu-border); background: #080908; }
     </style>
 </head>
 <body>
 
     <header class="header">
-        <a href="#" class="logo"><span class="gold-glow">🔱</span> ЗСУ</a>
-        <a href="#apply" class="btn-vsu" style="padding: 10px 20px; font-size: 12px; margin: 0;">Вступити</a>
+        <a href="#" class="logo">
+            <svg class="vsu-icon" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2L9 9H2L7 14L5 21L12 17L19 21L17 14L22 9H15L12 2Z"/></svg>
+            ЗСУ
+        </a>
+        <a href="https://discord.gg/dBHQuSg6sc" target="_blank" class="btn-vsu" style="padding: 10px 20px; font-size: 11px; margin: 0;">Вступити</a>
     </header>
 
     <section class="hero reveal">
-        <span class="section-tag">Офіційний портал набору</span>
-        <h1 class="hero-title">Свята справа<br><span class="gold-glow">Захист батьківщини</span></h1>
+        <h1 class="hero-title">Свята справа<br><span class="gold-text">Захист батьківщини</span></h1>
         
-        <div class="tactical-frame" style="max-width: 800px; width: 100%; margin-top: 50px;">
-            <div style="background: #1a1d17; height: 300px; display: flex; align-items: center; justify-content: center; color: var(--vsu-gold);">
-                <span style="font-size: 100px; opacity: 0.2;">🔱</span>
-                <p style="position: absolute; bottom: 20px; font-weight: 700; letter-spacing: 2px;">ЧЕСТЬ . МУЖНІСТЬ . ВІДВАГА</p>
+        <div class="tactical-frame" style="max-width: 900px; width: 100%;">
+            <div style="background: linear-gradient(45deg, #1a1d17, #0d0e0d); height: 350px; display: flex; align-items: center; justify-content: center;">
+                <svg class="vsu-icon" width="120" height="120" viewBox="0 0 24 24" style="opacity: 0.15;"><path d="M12 2L9 9H2L7 14L5 21L12 17L19 21L17 14L22 9H15L12 2Z"/></svg>
+                <div style="position: absolute; text-align: center;">
+                    <p style="letter-spacing: 10px; font-size: 14px; color: var(--vsu-gold); font-weight: 700;">UA . ARMY . RECRUITING</p>
+                </div>
             </div>
         </div>
 
-        <a href="#apply" class="btn-vsu">🔱 Вступай до ЗСУ</a>
+        <a href="https://discord.gg/dBHQuSg6sc" target="_blank" class="btn-vsu">
+            <svg class="vsu-icon" width="20" height="20" viewBox="0 0 24 24"><path d="M12 2L9 9H2L7 14L5 21L12 17L19 21L17 14L22 9H15L12 2Z"/></svg>
+            Вступай до ЗСУ
+        </a>
     </section>
 
     <section class="spec-section">
         <div style="text-align: center;">
-            <span class="gold-glow" style="font-size: 40px;">🔱</span>
-            <h2 style="font-size: 35px; text-transform: uppercase; margin-top: 10px;">Знайди себе в ЗСУ</h2>
+            <svg class="vsu-icon" width="50" height="50" viewBox="0 0 24 24"><path d="M12 2L9 9H2L7 14L5 21L12 17L19 21L17 14L22 9H15L12 2Z"/></svg>
+            <h2 style="font-size: 32px; text-transform: uppercase; margin-top: 15px; letter-spacing: 2px;">Знайди себе в ЗСУ</h2>
         </div>
 
         <div class="spec-grid">
             <div class="spec-card reveal">
-                <span class="icon">🪖</span>
+                <svg class="vsu-icon" width="45" height="45" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18l7 3.12v5.7c0 4.66-3.2 9.03-7 10.18-3.8-1.15-7-5.52-7-10.18v-5.7l7-3.12z"/></svg>
                 <h3>Штурмова піхота</h3>
-                <p style="color: var(--text-gray); font-size: 14px; margin-bottom: 25px;">Основа нашої могутності. Для тих, хто готовий бути на вістрі атаки.</p>
+                <p style="color: var(--text-gray); font-size: 13px; margin-bottom: 25px; line-height: 1.6;">Сила та натиск. Вирішальний вклад у кожну перемогу на землі.</p>
                 <a href="#" class="btn-small">Детальніше</a>
             </div>
 
             <div class="spec-card reveal">
-                <span class="icon">🛸</span>
+                <svg class="vsu-icon" width="45" height="45" viewBox="0 0 24 24"><path d="M21 16.5c0 .38-.21.71-.53.88l-7.97 4.44c-.31.17-.69.17-1 0L3.53 17.38c-.32-.17-.53-.5-.53-.88V7.5c0-.38.21-.71.53-.88l7.97-4.44c.31-.17.69-.17 1 0l7.97 4.44c.32.17.53.5.53.88v9z"/></svg>
                 <h3>Безпілотні системи</h3>
-                <p style="color: var(--text-gray); font-size: 14px; margin-bottom: 25px;">Технологічна перевага. Очі та довгі руки сучасної армії.</p>
+                <p style="color: var(--text-gray); font-size: 13px; margin-bottom: 25px; line-height: 1.6;">Технологічна перевага. Контроль неба та точні удари по ворогу.</p>
                 <a href="#" class="btn-small">Детальніше</a>
             </div>
 
             <div class="spec-card reveal">
-                <span class="icon">💥</span>
+                <svg class="vsu-icon" width="45" height="45" viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.45l8.15 14.55H3.85L12 5.45z"/></svg>
                 <h3>Артилерія та РЕБ</h3>
-                <p style="color: var(--text-gray); font-size: 14px; margin-bottom: 25px;">Боги війни. Точність та міць, що не залишає шансів ворогу.</p>
+                <p style="color: var(--text-gray); font-size: 13px; margin-bottom: 25px; line-height: 1.6;">Залізна міць. Придушення противника на будь-якій відстані.</p>
                 <a href="#" class="btn-small">Детальніше</a>
             </div>
 
             <div class="spec-card reveal">
-                <span class="icon">➕</span>
+                <svg class="vsu-icon" width="45" height="45" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 11h-4v4h-4v-4H6v-4h4V6h4v4h4v4z"/></svg>
                 <h3>Військова медицина</h3>
-                <p style="color: var(--text-gray); font-size: 14px; margin-bottom: 25px;">Рятувати життя під вогнем. Найвищий прояв людяності та професіоналізму.</p>
+                <p style="color: var(--text-gray); font-size: 13px; margin-bottom: 25px; line-height: 1.6;">Життя — найвища цінність. Професійна допомога в найтяжчих умовах.</p>
                 <a href="#" class="btn-small">Детальніше</a>
             </div>
         </div>
     </section>
 
     <footer class="footer reveal">
-        <div class="footer-grid">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 30px;">
             <div>
-                <div class="footer-logo"><span class="gold-glow">///</span> Збройні Сили України</div>
-                <p style="color: var(--text-gray); margin-top: 10px; font-size: 14px;">Стань частиною легендарної армії світу.</p>
-            </div>
-            <div style="display: flex; gap: 40px; flex-wrap: wrap;">
-                <div style="display: flex; flex-direction: column; gap: 10px;">
-                    <b style="color: var(--vsu-gold);">Служба</b>
-                    <span style="color: var(--text-gray); font-size: 14px;">Вакансії</span>
-                    <span style="color: var(--text-gray); font-size: 14px;">Навчання</span>
+                <div class="logo" style="font-size: 20px;">
+                    <svg class="vsu-icon" width="20" height="20" viewBox="0 0 24 24"><path d="M12 2L9 9H2L7 14L5 21L12 17L19 21L17 14L22 9H15L12 2Z"/></svg>
+                    Збройні Сили України
                 </div>
-                <div style="display: flex; flex-direction: column; gap: 10px;">
-                    <b style="color: var(--vsu-gold);">Інфо</b>
-                    <span style="color: var(--text-gray); font-size: 14px;">Про ЗСУ</span>
-                    <span style="color: var(--text-gray); font-size: 14px;">Контакти</span>
-                </div>
+                <p style="color: var(--text-gray); margin-top: 10px; font-size: 13px;">Честь. Мужність. Відвага.</p>
             </div>
-        </div>
-        <div style="margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--vsu-border); color: #555; font-size: 12px; display: flex; justify-content: space-between;">
-            <span>&copy; 2026 Збройні Сили України</span>
-            <span>XDEVS Digital Support</span>
+            <div style="font-size: 12px; color: #444; text-align: right;">
+                <p>&copy; 2026 ЗСУ | XDEVS Digital Support</p>
+                <p style="margin-top: 5px;">Всі права захищені</p>
+            </div>
         </div>
     </footer>
 
