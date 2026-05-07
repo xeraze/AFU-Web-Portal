@@ -3,690 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Служба Безпеки України | Набір до лав</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <title>Збройні Сили України | Твоя перемога починається тут</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #000000;
-            --card-bg: #0a0a0a;
-            --accent-orange: #f08c00;
-            --text-white: #ffffff;
+            --vsu-dark: #0d0e0d;
+            --vsu-green: #2d3321;
+            --vsu-gold: #c5a059;
+            --vsu-border: #3d4530;
+            --text-white: #e0e0e0;
             --text-gray: #a0a0a0;
-            --text-dark-gray: #555555;
-            --border-color: #222222;
         }
 
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            margin: 0; padding: 0; box-sizing: border-box;
             font-family: 'Montserrat', sans-serif;
-        }
-
-        html {
-            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg-dark);
+            background-color: var(--vsu-dark);
             color: var(--text-white);
             overflow-x: hidden;
-            position: relative;
-        }
-
-        .bg-watermark {
-            position: fixed;
-            top: 50%;
-            right: -5%;
-            transform: translateY(-50%);
-            width: 70vw;
-            height: 100vh;
-            background-image: url('https://ab3.army/wp-content/themes/ab3-army/dist//images/body-logo.svg');
-            background-repeat: no-repeat;
-            background-position: right center;
-            background-size: contain;
-            opacity: 0.04;
-            z-index: -1;
-            pointer-events: none;
         }
 
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
 
+        .gold-glow {
+            color: var(--vsu-gold) !important;
+            text-shadow: 0 0 15px rgba(197, 160, 89, 0.3);
+        }
+
+        .tactical-frame {
+            position: relative;
+            border: 1px solid var(--vsu-border);
+            padding: 10px;
+            background: rgba(45, 51, 33, 0.1);
+        }
+        .tactical-frame::before, .tactical-frame::after {
+            content: ''; position: absolute; width: 20px; height: 20px;
+            border: 2px solid var(--vsu-gold);
+        }
+        .tactical-frame::before { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
+        .tactical-frame::after { bottom: -2px; right: -2px; border-left: 0; border-top: 0; }
+
         .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            background-color: rgba(0, 0, 0, 0.95);
-            border-bottom: 1px solid var(--border-color);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 5%; background: rgba(13, 14, 13, 0.95);
+            border-bottom: 1px solid var(--vsu-border);
+            position: fixed; top: 0; width: 100%; z-index: 1000; backdrop-filter: blur(10px);
         }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--text-white);
-            text-decoration: none;
-            font-weight: 900;
-            font-size: 16px;
-            text-transform: uppercase;
-            line-height: 1.1;
-            letter-spacing: 1px;
-        }
-
-        .logo-icon {
-            color: var(--accent-orange);
-            font-size: 24px;
-            letter-spacing: -2px;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .btn-outline {
-            border: 1px solid var(--accent-orange);
-            color: var(--accent-orange);
-            background: transparent;
-            padding: 10px 20px;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
-        }
-
-        .btn-outline:hover {
-            background: var(--accent-orange);
-            color: var(--bg-dark);
-        }
-
-        .burger {
-            width: 30px;
-            height: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            cursor: pointer;
-            z-index: 2001;
-        }
-        .burger span {
-            display: block;
-            height: 2px;
-            background-color: var(--text-white);
-            transition: 0.3s;
-        }
-        .burger span:nth-child(2) { width: 70%; float: right; align-self: flex-end; }
-        
-        .burger.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
-        .burger.active span:nth-child(2) { opacity: 0; }
-        .burger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
-
-        .full-menu {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background: rgba(0,0,0,0.98); z-index: 2000;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            opacity: 0; visibility: hidden; transition: 0.4s;
-        }
-        .full-menu.active { opacity: 1; visibility: visible; }
-        .full-menu a { 
-            color: var(--text-white); font-size: clamp(24px, 5vw, 40px); font-weight: 900; 
-            text-decoration: none; text-transform: uppercase; margin: 15px 0; transition: 0.3s;
-        }
-        .full-menu a:hover { color: var(--accent-orange); transform: skewX(-5deg); }
-
-        section {
-            padding: 100px 20px 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .section-title {
-            font-size: clamp(30px, 5vw, 45px);
-            font-weight: 900;
-            text-transform: uppercase;
-            color: var(--accent-orange);
-            margin-bottom: 40px;
-            border-left: 5px solid var(--accent-orange);
-            padding-left: 20px;
-            line-height: 1.1;
-        }
-
-        .btn-main {
-            background-color: var(--accent-orange);
-            color: var(--bg-dark);
-            border: none;
-            padding: 20px 40px;
-            font-size: 18px;
-            font-weight: 900;
-            text-transform: uppercase;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
-            transition: 0.3s;
-            text-decoration: none;
-        }
-        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(240, 140, 0, 0.2); }
+        .logo { font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: #fff; text-decoration: none; }
 
         .hero {
-            min-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding-top: 120px;
+            padding: 150px 5% 80px;
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center; text-align: center;
         }
-        .word-cloud {
-            display: flex; flex-direction: column; gap: 8px;
-            margin-bottom: 50px; width: 100%; max-width: 800px;
-            text-transform: uppercase; line-height: 1.1;
+        .hero-title {
+            font-size: clamp(40px, 8vw, 95px);
+            font-weight: 900; text-transform: uppercase; line-height: 0.9;
+            margin-bottom: 20px;
         }
-        .w-small { font-size: 12px; color: var(--text-dark-gray); font-weight: 700; }
-        .w-medium { font-size: 16px; color: var(--text-gray); font-weight: 700; }
-        .w-large { font-size: 24px; color: var(--text-white); font-weight: 900; }
-        .w-xl { font-size: clamp(40px, 8vw, 80px); color: var(--accent-orange); font-weight: 900; line-height: 1; margin: 15px 0; display: block; }
-        .flex-row { display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap; }
-
-        .about-text p {
-            font-size: 18px; line-height: 1.6; color: #ccc; margin-bottom: 20px;
+        .btn-vsu {
+            background: var(--vsu-green);
+            color: white; border: 1px solid var(--vsu-gold);
+            padding: 20px 40px; font-weight: 900; text-transform: uppercase;
+            cursor: pointer; text-decoration: none; transition: 0.3s;
+            display: inline-block; margin-top: 30px;
         }
+        .btn-vsu:hover { background: var(--vsu-gold); color: black; }
 
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .card {
-            background: var(--card-bg); border: 1px solid var(--border-color);
-            padding: 30px; display: flex; flex-direction: column; height: 100%;
-            transition: 0.3s;
-        }
-        .card:hover { border-color: var(--accent-orange); background: #111; }
-        .card h3 { color: var(--accent-orange); font-size: 22px; margin-bottom: 15px; text-transform: uppercase; }
-        .card p { color: var(--text-gray); font-size: 15px; line-height: 1.6; margin-bottom: 25px; flex-grow: 1; }
-        .card .btn-outline { align-self: flex-start; }
-
-        .list-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
-        @media(min-width: 768px) { .list-grid { grid-template-columns: 1fr 1fr; } }
-        .list-item {
-            background: transparent; border-bottom: 1px solid var(--border-color);
-            padding: 20px 0; display: flex; flex-direction: column; gap: 10px;
-        }
-        .list-item h4 { font-size: 20px; color: var(--text-white); text-transform: uppercase; font-weight: 900; }
-        .list-item p { color: var(--text-gray); font-size: 15px; line-height: 1.5; }
-        .list-item .link-orange { color: var(--accent-orange); text-decoration: none; font-weight: 700; font-size: 14px; text-transform: uppercase; margin-top: 10px; display: inline-block; }
-        .list-item .link-orange:hover { text-decoration: underline; }
-
-        .faq-item { border-bottom: 1px solid var(--border-color); }
-        .faq-header {
-            padding: 25px 0; display: flex; justify-content: space-between; align-items: center;
-            cursor: pointer; font-weight: 700; font-size: 18px; text-transform: uppercase; transition: 0.3s;
-        }
-        .faq-header:hover { color: var(--accent-orange); }
-        .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; color: var(--text-gray); line-height: 1.6; }
-        .faq-item.active .faq-content { max-height: 300px; padding-bottom: 25px; }
-        .faq-icon { font-size: 24px; color: var(--accent-orange); transition: 0.3s; font-weight: 400; }
-        .faq-item.active .faq-icon { transform: rotate(45deg); }
-
-        .step-item { display: flex; gap: 20px; margin-bottom: 30px; }
-        .step-num { font-size: 40px; font-weight: 900; color: var(--accent-orange); line-height: 1; min-width: 60px; }
-        .step-text h4 { font-size: 22px; text-transform: uppercase; margin-bottom: 10px; }
-        .step-text p { color: var(--text-gray); line-height: 1.6; }
-
-        .form-wrapper { background: var(--card-bg); border: 1px solid var(--border-color); padding: 40px; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        @media(max-width: 768px) { .form-grid { grid-template-columns: 1fr; } }
+        .spec-section { padding: 100px 5%; max-width: 1200px; margin: 0 auto; }
+        .section-tag { color: var(--vsu-gold); text-transform: uppercase; letter-spacing: 4px; font-size: 14px; margin-bottom: 10px; display: block; }
         
-        .input-field {
-            background: #111; border: 1px solid #333; padding: 18px;
-            color: white; width: 100%; outline: none; font-size: 16px; transition: 0.3s;
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px; margin-top: 50px;
         }
-        .input-field:focus { border-color: var(--accent-orange); }
-        .col-full { grid-column: 1 / -1; }
-
-        .radio-group { margin-top: 10px; display: flex; gap: 20px; }
-        .radio-label { display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--text-gray); }
-        .radio-label input { accent-color: var(--accent-orange); width: 18px; height: 18px; cursor: pointer; }
-
-        .checkbox-wrapper { display: flex; align-items: flex-start; gap: 15px; margin-top: 20px; cursor: pointer; }
-        .checkbox-wrapper input { display: none; }
-        .checkmark {
-            width: 24px; height: 24px; background: #111; border: 1px solid #333; 
-            display: flex; justify-content: center; align-items: center; flex-shrink: 0; transition: 0.2s;
+        .spec-card {
+            background: #151812;
+            border: 1px solid var(--vsu-border);
+            padding: 40px; text-align: center;
+            transition: 0.4s;
         }
-        .checkbox-wrapper input:checked + .checkmark { background: var(--accent-orange); border-color: var(--accent-orange); }
-        .checkbox-wrapper input:checked + .checkmark::after {
-            content: "✓"; color: #000; font-weight: 900; font-size: 16px;
+        .spec-card:hover { border-color: var(--vsu-gold); transform: translateY(-10px); }
+        .spec-card .icon { font-size: 45px; margin-bottom: 20px; display: block; }
+        .spec-card h3 { text-transform: uppercase; margin-bottom: 15px; font-size: 20px; }
+        .btn-small {
+            border: 1px solid var(--vsu-gold); color: var(--vsu-gold);
+            padding: 10px 20px; font-size: 12px; text-decoration: none; text-transform: uppercase;
         }
-        .checkbox-text { color: var(--text-gray); font-size: 14px; line-height: 1.5; }
-        .checkbox-text a { color: var(--accent-orange); text-decoration: none; }
-        .checkbox-text a:hover { text-decoration: underline; }
 
-        .footer { background: #050505; border-top: 1px solid var(--border-color); padding: 60px 20px; margin-top: 80px; }
-        .footer-grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; max-width: 1200px; margin: 0 auto; }
-        .footer-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; width: 100%; max-width: 800px; }
-        .footer-links a { color: var(--text-gray); text-decoration: none; font-size: 14px; text-transform: uppercase; transition: 0.3s; }
-        .footer-links a:hover { color: var(--accent-orange); }
-        .footer-bottom { margin-top: 50px; padding-top: 20px; border-top: 1px solid #222; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; color: #666; font-size: 12px; text-transform: uppercase; max-width: 1200px; margin: 50px auto 0; }
-        .footer-bottom a { color: #666; text-decoration: none; }
-        .footer-bottom a:hover { color: var(--accent-orange); }
+        .footer {
+            border-top: 1px solid var(--vsu-border);
+            padding: 60px 5%; margin-top: 100px; background: #080908;
+        }
+        .footer-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
+        .footer-logo { font-weight: 900; text-transform: uppercase; font-size: 20px; }
 
     </style>
 </head>
 <body>
 
-    <div class="bg-watermark"></div>
-
-    <div class="full-menu" id="fullMenu">
-        <div class="close-menu" onclick="toggleMenu()">×</div>
-        <a href="#about" onclick="toggleMenu()">Про СБУ</a>
-        <a href="#path" onclick="toggleMenu()">Шляхи служби</a>
-        <a href="#structure" onclick="toggleMenu()">Структура</a>
-        <a href="#faq" onclick="toggleMenu()">Запитання</a>
-        <a href="#apply" onclick="toggleMenu()" style="color: var(--accent-orange);">Приєднатися</a>
-    </div>
-
     <header class="header">
-        <a href="#" class="logo">
-            <span class="logo-icon">///</span>
-            <span>Служба Безпеки<br>України</span>
-        </a>
-        <div class="header-actions">
-            <a href="#apply" class="btn-outline d-none d-md-block">Подати заявку</a>
-            <div class="burger" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
+        <a href="#" class="logo"><span class="gold-glow">🔱</span> ЗСУ</a>
+        <a href="#apply" class="btn-vsu" style="padding: 10px 20px; font-size: 12px; margin: 0;">Вступити</a>
     </header>
 
-    <main>
-        <section class="hero reveal">
-            <div class="word-cloud">
-                <div class="flex-row">
-                    <span class="w-small">Сучасне оснащення</span>
-                    <span class="w-small">Новий рівень підготовки</span>
-                </div>
-                <div class="flex-row">
-                    <span class="w-large">КОМАНДИРИ З ОКОПІВ</span>
-                    <span class="w-small">Бережемо життя</span>
-                </div>
-                <div class="flex-row">
-                    <span class="w-small">Своя лікарня</span>
-                    <span class="w-medium">ВЛАСНЕ ППО</span>
-                </div>
-                <div class="flex-row">
-                    <span class="w-large">ПРОФЕСІЙНИЙ РЕЗЕРВ</span>
-                    <span class="w-small">Піклуємось після служби</span>
-                </div>
-                <div class="flex-row">
-                    <span class="w-small">Людяне ставлення</span>
-                    <span class="w-medium">ПОСТІЙНО НАВЧАЄМОСЬ</span>
-                </div>
-                
-                <span class="w-xl">ЗРОБЛЕНО<br>ДЛЯ ТЕБЕ</span>
+    <section class="hero reveal">
+        <span class="section-tag">Офіційний портал набору</span>
+        <h1 class="hero-title">Свята справа<br><span class="gold-glow">Захист батьківщини</span></h1>
+        
+        <div class="tactical-frame" style="max-width: 800px; width: 100%; margin-top: 50px;">
+            <div style="background: #1a1d17; height: 300px; display: flex; align-items: center; justify-content: center; color: var(--vsu-gold);">
+                <span style="font-size: 100px; opacity: 0.2;">🔱</span>
+                <p style="position: absolute; bottom: 20px; font-weight: 700; letter-spacing: 2px;">ЧЕСТЬ . МУЖНІСТЬ . ВІДВАГА</p>
+            </div>
+        </div>
 
-                <div class="w-medium">ЦІНУЄМО ЗАСЛУГИ, А НЕ ПОГОНИ</div>
-                <div class="flex-row">
-                    <span class="w-small">Постійно навчаємось</span>
-                    <span class="w-medium">ЛЮДЯНІ КОМАНДИРИ</span>
-                </div>
-                <div class="flex-row">
-                    <span class="w-large">ВСІХ ЗАБЕЗПЕЧУЄМО</span>
-                    <span class="w-small">Будуємо дороги</span>
-                </div>
-                <div class="flex-row">
-                    <span class="w-small">Бережемо життя</span>
-                    <span class="w-medium">ПІКЛУЄМОСЬ ПІСЛЯ СЛУЖБИ</span>
-                </div>
+        <a href="#apply" class="btn-vsu">🔱 Вступай до ЗСУ</a>
+    </section>
+
+    <section class="spec-section">
+        <div style="text-align: center;">
+            <span class="gold-glow" style="font-size: 40px;">🔱</span>
+            <h2 style="font-size: 35px; text-transform: uppercase; margin-top: 10px;">Знайди себе в ЗСУ</h2>
+        </div>
+
+        <div class="spec-grid">
+            <div class="spec-card reveal">
+                <span class="icon">🪖</span>
+                <h3>Штурмова піхота</h3>
+                <p style="color: var(--text-gray); font-size: 14px; margin-bottom: 25px;">Основа нашої могутності. Для тих, хто готовий бути на вістрі атаки.</p>
+                <a href="#" class="btn-small">Детальніше</a>
             </div>
 
-            <a href="#apply" class="btn-main">
-                Подати заявку 
-                <span style="font-weight: 400; font-size: 26px;">&#8599;</span>
-            </a>
-        </section>
-
-        <section id="about" class="reveal">
-            <h2 class="section-title">Про СБУ</h2>
-            <div class="about-text" style="max-width: 900px;">
-                <p>Служба безпеки України — елітна спецслужба, що поєднує багаторічні традиції розвідки з унікальним бойовим досвідом сучасної війни.</p>
-                <p>За плечима наших оперативників та спецпризначенців — надскладні операції в тилу ворога, ліквідація загроз державній безпеці та безпрецедентні морські й повітряні атаки дронів, що змінили правила гри на морі та в небі.</p>
-                <p>Найвищі стандарти контррозвідки та бойової підготовки у власних центрах спецоперацій, де виховують професіоналів нового покоління. Служба, де інтелект, технологічна перевага та рішуче командування діють на випередження — щоб знищити ворога там, де він найменш захищений.</p>
-            </div>
-            <a href="#structure" class="btn-outline" style="display: inline-block; margin-top: 20px;">Детальніше</a>
-        </section>
-
-        <section id="path" class="reveal">
-            <h2 class="section-title">Обирай свій шлях</h2>
-            <div class="grid-3">
-                <div class="card">
-                    <h3>Прагну діяти</h3>
-                    <p>Стань частиною легендарних спецпідрозділів: бери участь у рейдах, працюй у групах снайперів, знищуй ворожий флот морськими дронами та проводь затримання небезпечних злочинців.</p>
-                    <a href="#structure" class="btn-outline">Бойові та оперативні посади</a>
-                </div>
-                <div class="card">
-                    <h3>Маю фахову спеціалізацію</h3>
-                    <p>Використовуй свій інтелект та професійні навички: у сферах кібербезпеки, аналітики, зв’язку, медицини чи інженерії — там, де технології та досвід вирішують долю операцій.</p>
-                    <a href="#structure" class="btn-outline">Спеціалізовані та забезпечувальні</a>
-                </div>
-                <div class="card">
-                    <h3>Хочу стати професіоналом</h3>
-                    <p>Здобудь елітну освіту та пройди підготовку за стандартами найкращих спецслужб світу. Від навчання курсантів у Національній академії СБУ до спецкурсів у тренувальних центрах.</p>
-                    <a href="#" class="btn-outline">Навчання та підготовка</a>
-                </div>
-            </div>
-        </section>
-
-        <section class="reveal">
-            <h2 class="section-title">Знайди себе в СБУ</h2>
-            <div class="about-text mb-5" style="max-width: 900px; margin-bottom: 40px;">
-                <p>Служба безпеки України — місце, де твій досвід стає зброєю, а фах визначає перемогу.</p>
-                <p>Тут ти можеш реалізуватися як оперативник, технічний спеціаліст або аналітик. Обирай свій шлях у команді, що працює на межі можливостей у бойових, цифрових та інтелектуальних операціях.</p>
-                <p>Розвивайся там, де ти найсильніший: переглянь актуальні напрямки.</p>
+            <div class="spec-card reveal">
+                <span class="icon">🛸</span>
+                <h3>Безпілотні системи</h3>
+                <p style="color: var(--text-gray); font-size: 14px; margin-bottom: 25px;">Технологічна перевага. Очі та довгі руки сучасної армії.</p>
+                <a href="#" class="btn-small">Детальніше</a>
             </div>
 
-            <div class="list-grid">
-                <div class="list-item">
-                    <h4>Переведення та повернення</h4>
-                    <p>Для діючих військовослужбовців та фахівців, які прагнуть долучитися до лав спецслужби.</p>
-                    <a href="#apply" class="link-orange">[Деталі]</a>
-                </div>
-                <div class="list-item">
-                    <h4>ЦСО «А» (Альфа)</h4>
-                    <p>Елітні бойові підрозділи: штурмові групи, снайпінг та вогнева підтримка в найгарячіших точках.</p>
-                    <a href="#apply" class="link-orange">[Деталі]</a>
-                </div>
-                <div class="list-item">
-                    <h4>Морські та повітряні дрони</h4>
-                    <p>Технологічна першість: оператори Sea Baby, MAGURA та ударних БПЛА, що нищать ворога на відстані.</p>
-                    <a href="#apply" class="link-orange">[Деталі]</a>
-                </div>
-                <div class="list-item">
-                    <h4>Кібербезпека</h4>
-                    <p>Війна у цифровому просторі: відбиття хакерських атак, захист інфраструктури та операції в мережах ворога.</p>
-                    <a href="#apply" class="link-orange">[Деталі]</a>
-                </div>
-                <div class="list-item">
-                    <h4>Контррозвідка</h4>
-                    <p>Виявлення агентів, боротьба з колаборантами та захист державної таємниці за найвищими стандартами.</p>
-                    <a href="#apply" class="link-orange">[Деталі]</a>
-                </div>
-                <div class="list-item">
-                    <h4>Технічна розвідка та РЕБ</h4>
-                    <p>Робота з високотехнологічним обладнанням, перехоплення даних та радіоелектронне придушення.</p>
-                    <a href="#apply" class="link-orange">[Деталі]</a>
-                </div>
-                <div class="list-item">
-                    <h4>Військова медицина СБУ</h4>
-                    <p>Забезпечення здоров'я спецпризначенців: робота за протоколами TCCC та стабілізаційні пункти.</p>
-                    <a href="#apply" class="link-orange">[Деталі]</a>
-                </div>
-                <div class="list-item">
-                    <h4>Логістика та забезпечення</h4>
-                    <p>Тилова підтримка: від майстрів з обслуговування спецтранспорту до інженерів та зв’язківців.</p>
-                    <a href="#apply" class="link-orange">[Деталі]</a>
-                </div>
-                <div class="list-item">
-                    <h4>Аналітика та право</h4>
-                    <p>Робота з великими даними, юридичний супровід операцій та стратегічне планування безпеки.</p>
-                    <a href="#apply" class="link-orange">[Деталі]</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="structure" class="reveal">
-            <h2 class="section-title">Структура та підрозділи Служби</h2>
-            <div class="list-grid">
-                <div class="list-item">
-                    <h4>Центр спеціальних операцій «А» (Альфа)</h4>
-                    <p>Елітний спецпідрозділ для проведення найскладніших силових операцій, антитерористичних заходів та бойових місій на передовій.</p>
-                </div>
-                <div class="list-item">
-                    <h4>Головне слідче управління (ГСУ)</h4>
-                    <p>Найвищий рівень розслідувань: збір доказів воєнних злочинів рф, документування державної зради та робота над справами національної ваги.</p>
-                </div>
-                <div class="list-item">
-                    <h4>Департамент захисту національної державності (ДЗНД)</h4>
-                    <p>Захист конституційного ладу, боротьба з сепаратизмом та протидія загрозам територіальній цілісності України.</p>
-                </div>
-                <div class="list-item">
-                    <h4>Антитерористичний центр (АТЦ)</h4>
-                    <p>Координаційний орган, що відповідає за планування та проведення антитерористичних операцій, забезпечуючи безпеку стратегічних об'єктів.</p>
-                </div>
-                <div class="list-item">
-                    <h4>Головне управління внутрішньої безпеки (ГУВБ)</h4>
-                    <p>Орган самоочищення Служби: запобігання корупції, виявлення подвійних агентів та забезпечення бездоганної репутації співробітників.</p>
-                </div>
-                <div class="list-item">
-                    <h4>Департамент військової контррозвідки</h4>
-                    <p>Ті, хто очищує лави Сил оборони від ворожих агентів та забезпечує безпеку на лінії фронту.</p>
-                </div>
-                <div class="list-item">
-                    <h4>Департамент кібербезпеки (ДКІБ)</h4>
-                    <p>Цифровий фронт: відбиття хакерських атак, проведення кібероперацій та захист критичної інфраструктури в мережі.</p>
-                </div>
-                <div class="list-item">
-                    <h4>Центр безпілотних систем СБУ</h4>
-                    <p>Підрозділи-розробники та оператори морських дронів («Sea Baby», «Мамай») та далекобійних ударних БПЛА.</p>
-                </div>
-                <div class="list-item">
-                    <h4>Національна академія СБУ</h4>
-                    <p>Головна кузня кадрів, де готують офіцерів спецслужби нового покоління за найвищими стандартами.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="faq" class="reveal">
-            <h2 class="section-title">Запитання та відповіді</h2>
-            <div class="about-text mb-4">
-                <p>Тут ви знайдете чіткі відповіді на найпопулярніші запитання: від проходження спецперевірки та критеріїв відбору до особливостей проходження служби в лавах спецслужби.</p>
-                <span class="link-orange" style="color: var(--accent-orange) !important; cursor: pointer; text-decoration: none;">[Перейти до всіх питань]</span>
+            <div class="spec-card reveal">
+                <span class="icon">💥</span>
+                <h3>Артилерія та РЕБ</h3>
+                <p style="color: var(--text-gray); font-size: 14px; margin-bottom: 25px;">Боги війни. Точність та міць, що не залишає шансів ворогу.</p>
+                <a href="#" class="btn-small">Детальніше</a>
             </div>
 
-            <div class="faq-list" style="margin-top: 40px;">
-                <div class="faq-item">
-                    <div class="faq-header">Чи означає подача анкети автоматичне зарахування до Служби? <span class="faq-icon">+</span></div>
-                    <div class="faq-content">Ні. Подача заявки — це лише перший етап. Після цього кандидати проходять професійний відбір, психологічне тестування, ВЛК та обов'язкову спеціальну перевірку.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-header">Чи можна перевестися до СБУ з інших родів військ (ЗСУ, НГУ)? <span class="faq-icon">+</span></div>
-                    <div class="faq-content">Так, переведення можливе. Процедура залежить від вашої поточної посади, звання та результатів співбесіди з профільним підрозділом СБУ.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-header">Яка різниця між службою за контрактом та за призовом в СБУ? <span class="faq-icon">+</span></div>
-                    <div class="faq-content">В СБУ можливі обидва варіанти, проте пріоритет надається довгостроковому контракту, який відкриває ширші можливості для кар’єрного зростання та профільного навчання.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-header">Чи обов’язково проходити поліграф («детектор брехні»)? <span class="faq-icon">+</span></div>
-                    <div class="faq-content">Так. Спеціальне психофізіологічне дослідження із застосуванням поліграфа є обов'язковим етапом для всіх кандидатів на службу в СБУ.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-header">Чи приймає СБУ кандидатів із судимістю? <span class="faq-icon">+</span></div>
-                    <div class="faq-content">Ні. Наявність судимості (навіть погашеної) або фактів притягнення до кримінальної відповідальності є критичною перепоною для проходження служби в органах безпеки.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-header">Яке грошове забезпечення отримують співробітники СБУ? <span class="faq-icon">+</span></div>
-                    <div class="faq-content">Бійці та співробітники отримують гідне грошове забезпечення, що включає посадовий оклад, надбавки за вислугу років, особливості служби та додаткові виплати за участь у бойових діях.</div>
-                </div>
+            <div class="spec-card reveal">
+                <span class="icon">➕</span>
+                <h3>Військова медицина</h3>
+                <p style="color: var(--text-gray); font-size: 14px; margin-bottom: 25px;">Рятувати життя під вогнем. Найвищий прояв людяності та професіоналізму.</p>
+                <a href="#" class="btn-small">Детальніше</a>
             </div>
-        </section>
-
-        <section class="reveal">
-            <h2 class="section-title">Етапи вступу</h2>
-            <div style="margin-bottom: 40px;">
-                <a href="#apply" class="btn-outline">Стати до лав СБУ</a>
-            </div>
-
-            <div class="step-item">
-                <div class="step-num">01</div>
-                <div class="step-text">
-                    <h4>Анкетування</h4>
-                    <p>Залишай заявку на сайті або звертайся до регіонального управління. Ми проведемо попереднє інтерв’ю, щоб зрозуміти твої прагнення та підібрати напрямок, де твої здібності будуть максимально ефективними.</p>
-                </div>
-            </div>
-            <div class="step-item">
-                <div class="step-num">02</div>
-                <div class="step-text">
-                    <h4>Професійний відбір</h4>
-                    <p>Етап тестування твоїх скілів: від інтелектуальних здібностей та психологічної стійкості до фізичної підготовки (для бойових підрозділів). Ми маємо переконатися, що ти готовий до викликів спецслужби.</p>
-                </div>
-            </div>
-            <div class="step-item">
-                <div class="step-num">03</div>
-                <div class="step-text">
-                    <h4>Спеціальна перевірка</h4>
-                    <p>Критичний етап для кожного майбутнього співробітника. Проходження поліграфа та ретельна перевірка біографії. Безпека держави починається з чистоти власних лав — ми довіряємо лише кращим.</p>
-                </div>
-            </div>
-            <div class="step-item">
-                <div class="step-num">04</div>
-                <div class="step-text">
-                    <h4>Фахова підготовка</h4>
-                    <p>Після зарахування ти проходиш інтенсивний курс у Національній академії СБУ або центрах підготовки. Ти опануєш специфіку своєї посади: від оперативної майстерності до високих технологій та тактичної медицини.</p>
-                </div>
-            </div>
-            <div class="step-item">
-                <div class="step-num">05</div>
-                <div class="step-text">
-                    <h4>Реалізація та зростання</h4>
-                    <p>Вітаємо в команді! З цього моменту ти на захисті національної безпеки. Попереду — участь у реальних операціях, постійне підвищення кваліфікації та кар’єрний шлях у найпрестижнішій спецслужбі країни.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="apply" class="reveal">
-            <h2 class="section-title">Приєднуйся</h2>
-            <div class="form-wrapper">
-                <form class="form-grid" action="#" method="POST" onsubmit="event.preventDefault(); alert('Анкету успішно відправлено! Ми зв\'яжемося з Вами найближчим часом.');">
-                    <input type="text" class="input-field" placeholder="Прізвище*" required>
-                    <input type="text" class="input-field" placeholder="Ім'я*" required>
-                    <input type="text" class="input-field" placeholder="По батькові">
-                    <input type="text" class="input-field" placeholder="Roblox Username*" required>
-                    <input type="text" class="input-field" placeholder="Discord Username*" required>
-                    
-                    <div class="col-full" style="margin-top: 10px;">
-                        <p style="color: var(--text-gray); font-size: 14px; margin-bottom: 10px;">Чи є військовослужбовцем на даний момент?</p>
-                        <div class="radio-group">
-                            <label class="radio-label">
-                                <input type="radio" name="military" value="yes" required> Так
-                            </label>
-                            <label class="radio-label">
-                                <input type="radio" name="military" value="no"> Ні
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="col-full">
-                        <label class="checkbox-wrapper">
-                            <input type="checkbox" required>
-                            <div class="checkmark"></div>
-                            <span class="checkbox-text">Я погоджуюсь з <a href="#">Політикою конфіденційності</a> та підтверджую, що мені від 14 до 54 років*</span>
-                        </label>
-                    </div>
-
-                    <div class="col-full" style="margin-top: 20px;">
-                        <button type="submit" class="btn-main w-100" style="width: 100%;">ПОДАТИ ЗАЯВКУ</button>
-                    </div>
-                </form>
-            </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <footer class="footer reveal">
-    <div class="footer-grid">
-        <div style="text-align: left;">
-            <div class="footer-logo" style="cursor: default; font-weight: 900; text-decoration: none; color: white; margin-bottom: 20px; display: block;">
-                <span style="color: var(--accent-orange);">///</span> СЛУЖБА БЕЗПЕКИ УКРАЇНИ
+        <div class="footer-grid">
+            <div>
+                <div class="footer-logo"><span class="gold-glow">///</span> Збройні Сили України</div>
+                <p style="color: var(--text-gray); margin-top: 10px; font-size: 14px;">Стань частиною легендарної армії світу.</p>
             </div>
-            <a href="#apply" class="btn-outline">Подати заявку</a>
+            <div style="display: flex; gap: 40px; flex-wrap: wrap;">
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <b style="color: var(--vsu-gold);">Служба</b>
+                    <span style="color: var(--text-gray); font-size: 14px;">Вакансії</span>
+                    <span style="color: var(--text-gray); font-size: 14px;">Навчання</span>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <b style="color: var(--vsu-gold);">Інфо</b>
+                    <span style="color: var(--text-gray); font-size: 14px;">Про ЗСУ</span>
+                    <span style="color: var(--text-gray); font-size: 14px;">Контакти</span>
+                </div>
+            </div>
         </div>
-        <div class="footer-links">
-            <a href="#">Головна</a>
-            <a href="#about">Про корпус</a>
-            <a href="#path">Вакансії</a>
-            <a href="#faq">FAQ</a>
-            <span style="color: var(--text-gray); cursor: default;">Для іноземців</span>
-            <span style="color: var(--text-gray); cursor: default;">Навчання</span>
-            <span style="color: var(--text-gray); cursor: default;">Патронатна служба</span>
-            <span style="color: var(--text-gray); cursor: default;">Благодійний фонд</span>
-            <span style="color: var(--text-gray); cursor: default;">Тест-драйв Технічна розвідка</span>
-            <span style="color: var(--text-gray); cursor: default;">Тестовий тиждень Розвідка</span>
-            <span style="color: var(--text-gray); cursor: default;">Тестовий тиждень Артилерія</span>
-            <a href="#">Контакти</a>
-            <span style="color: var(--text-gray); cursor: default;">Блог</span>
+        <div style="margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--vsu-border); color: #555; font-size: 12px; display: flex; justify-content: space-between;">
+            <span>&copy; 2026 Збройні Сили України</span>
+            <span>XDEVS Digital Support</span>
         </div>
-    </div>
-    <div class="footer-bottom">
-        <span>XDEVS &copy; 2026</span>
-        <div style="display: flex; gap: 20px;">
-            <span style="cursor: default;">Cookie policy</span>
-            <span style="cursor: default;">Політика конфіденційності</span>
-        </div>
-    </div>
-</footer>
+    </footer>
 
     <script>
-        function toggleMenu() {
-            const menu = document.getElementById('fullMenu');
-            const burger = document.querySelector('.burger');
-            menu.classList.toggle('active');
-            burger.classList.toggle('active');
-            document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
-        }
-
-        document.querySelectorAll('.faq-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const item = header.parentElement;
-                const isActive = item.classList.contains('active');
-                
-                document.querySelectorAll('.faq-item').forEach(i => {
-                    i.classList.remove('active');
-                    i.querySelector('.faq-icon').textContent = '+';
-                });
-
-                if (!isActive) {
-                    item.classList.add('active');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    entry.target.classList.remove('active');
                 }
             });
-        });
+        }, { threshold: 0.1 });
 
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-        } else {
-            entry.target.classList.remove('active');
-        }
-    });
-}, observerOptions);
-
-document.querySelectorAll('.reveal').forEach(section => {
-    observer.observe(section);
-});
-
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
