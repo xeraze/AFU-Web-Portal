@@ -7,6 +7,9 @@
 <meta name="description" content="Оперативне Командування Південь — офіційний RP-портал. Захист південних рубежів. Приєднуйся до лав ОК «Південь».">
 
 <link rel="stylesheet" href="styles.css" media="all">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
 </head>
 <body class="home wp-singular page-template page-template-front-page">
 <div id="page" class="site">
@@ -18,8 +21,8 @@
 				<svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
 					<path d="M48 4 L88 20 V50 C88 74 70 88 48 94 C26 88 8 74 8 50 V20 Z" fill="#0f0f0d" stroke="#dbdd8c" stroke-width="2"/>
 					<path d="M48 16 L78 28 V50 C78 68 65 79 48 84 C31 79 18 68 18 50 V28 Z" fill="none" stroke="#dbdd8c" stroke-width="1.5"/>
-					<text x="48" y="47" text-anchor="middle" font-family="UAFSansNameTape, Arial Black, sans-serif" font-size="20" fill="#dbdd8c">ОК</text>
-					<text x="48" y="68" text-anchor="middle" font-family="UAFSansNameTape, Arial Black, sans-serif" font-size="11" fill="#dbdd8c" letter-spacing="1">ПІВДЕНЬ</text>
+					<text x="48" y="47" text-anchor="middle" font-family="UAFSansNameTape, 'Dela Gothic One', Arial Black, sans-serif" font-size="20" fill="#dbdd8c">ОК</text>
+					<text x="48" y="68" text-anchor="middle" font-family="UAFSansNameTape, 'Dela Gothic One', Arial Black, sans-serif" font-size="11" fill="#dbdd8c" letter-spacing="1">ПІВДЕНЬ</text>
 				</svg>
 			</a>
 
@@ -52,7 +55,7 @@
 
 			<button class="header__nav-button js-nav__toggle" aria-controls="site-navigation" aria-label="Navigation toggle button"></button>
 		</div>
-	</header>
+	</header><!-- #masthead -->
 
 <main id="primary" class="main">
 
@@ -341,6 +344,87 @@ Command тримає під контролем південний напрямо
   </div>
 </section>
 
+<section class="apply-form" id="apply">
+  <div class="container">
+    <h2 class="section__title aos-init" data-aos="fade-up">
+      Подати заявку
+    </h2>
+
+    <form class="wpcf7-form" id="applyForm" novalidate>
+      <div class="wpcf7-form-control-wrap">
+        <label for="apply-name">ПІБ</label>
+        <div class="form-input">
+          <input type="text" id="apply-name" name="name" required>
+        </div>
+      </div>
+
+      <div class="wpcf7-form-control-wrap">
+        <label for="apply-discord">Discord</label>
+        <div class="form-input">
+          <input type="text" id="apply-discord" name="discord" placeholder="username" required>
+        </div>
+      </div>
+
+      <div class="wpcf7-form-control-wrap">
+        <label for="apply-age">Вік</label>
+        <div class="form-input">
+          <input type="number" id="apply-age" name="age" min="14" max="60" required>
+        </div>
+      </div>
+
+      <div class="wpcf7-form-control-wrap">
+        <label>Обраний підрозділ</label>
+        <span class="wpcf7-radio">
+          <span class="wpcf7-list-item">
+            <label class="wpcf7-list-item-label">
+              <input type="radio" name="subdivision" value="1-й Механізований батальйон (1-МБ)" required>
+              1-й Механізований батальйон (1-МБ)
+            </label>
+          </span>
+          <span class="wpcf7-list-item">
+            <label class="wpcf7-list-item-label">
+              <input type="radio" name="subdivision" value="Розвідувальна рота (РР)">
+              Розвідувальна рота (РР)
+            </label>
+          </span>
+          <span class="wpcf7-list-item">
+            <label class="wpcf7-list-item-label">
+              <input type="radio" name="subdivision" value="Снайперська рота (РС)">
+              Снайперська рота (РС)
+            </label>
+          </span>
+          <span class="wpcf7-list-item">
+            <label class="wpcf7-list-item-label">
+              <input type="radio" name="subdivision" value="Батальйон матеріального забезпечення (БМЗ)">
+              Батальйон матеріального забезпечення (БМЗ)
+            </label>
+          </span>
+          <span class="wpcf7-list-item">
+            <label class="wpcf7-list-item-label">
+              <input type="radio" name="subdivision" value="Медична рота (МР)">
+              Медична рота (МР)
+            </label>
+          </span>
+        </span>
+      </div>
+
+      <div class="wpcf7-form-control-wrap">
+        <label for="apply-comment">Коментар</label>
+        <div class="form-input">
+          <textarea id="apply-comment" name="comment" rows="3"></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="button" id="applySubmitBtn">
+        <span id="applySubmitLabel">Відправити заявку</span>
+        <svg class="icon"><use xlink:href="#arrow-button"></use></svg>
+      </button>
+
+      <div id="applyFormStatus" class="form__status"></div>
+    </form>
+  </div>
+</section>
+
 </main>
 
 <footer id="colophon" class="footer">
@@ -348,9 +432,9 @@ Command тримає під контролем південний напрямо
 		<a href="#" class="footer__logo" aria-label="Logo of ОК Південь">
 			<svg viewBox="0 0 216 60" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
 				<path d="M30 4 L54 12 V32 C54 45 44 53 30 57 C16 53 6 45 6 32 V12 Z" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.85"/>
-				<text x="30" y="34" text-anchor="middle" font-family="UAFSansNameTape, Arial Black, sans-serif" font-size="15" fill="#fff">ОК</text>
-				<text x="70" y="26" font-family="UAFSansNameTape, Arial Black, sans-serif" font-size="19" fill="#fff" letter-spacing="0.5">ОПЕРАТИВНЕ</text>
-				<text x="70" y="46" font-family="UAFSansNameTape, Arial Black, sans-serif" font-size="19" fill="#fff" letter-spacing="0.5">КОМАНДУВАННЯ ПІВДЕНЬ</text>
+				<text x="30" y="34" text-anchor="middle" font-family="UAFSansNameTape, 'Dela Gothic One', Arial Black, sans-serif" font-size="15" fill="#fff">ОК</text>
+				<text x="70" y="26" font-family="UAFSansNameTape, 'Dela Gothic One', Arial Black, sans-serif" font-size="19" fill="#fff" letter-spacing="0.5">ОПЕРАТИВНЕ</text>
+				<text x="70" y="46" font-family="UAFSansNameTape, 'Dela Gothic One', Arial Black, sans-serif" font-size="19" fill="#fff" letter-spacing="0.5">КОМАНДУВАННЯ ПІВДЕНЬ</text>
 			</svg>
 		</a>
 
@@ -403,4 +487,21 @@ Command тримає під контролем південний напрямо
 	</symbol>
 	<symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" id="social-ig">
 		<g clip-path="url(#clip0_472_2460)">
-			<path d="M4.35395 0.700001H9.64595C11.662 0.700001 13.3 2.338 13.3 4.354V9.646C13.3 10.6151 12.915 11.5445 12.2297 12.2298C11.5445 12.915 10.6151 13.3 9.64595
+			<path d="M4.35395 0.700001H9.64595C11.662 0.700001 13.3 2.338 13.3 4.354V9.646C13.3 10.6151 12.915 11.5445 12.2297 12.2298C11.5445 12.915 10.6151 13.3 9.64595 13.3H4.35395C2.33795 13.3 0.699951 11.662 0.699951 9.646V4.354C0.699951 3.3849 1.08493 2.45549 1.77018 1.77023C2.45544 1.08497 3.38485 0.700001 4.35395 0.700001M4.22795 1.96C3.62644 1.96 3.04957 2.19895 2.62423 2.62428C2.1989 3.04962 1.95995 3.62649 1.95995 4.228V9.772C1.95995 11.0257 2.97425 12.04 4.22795 12.04H9.77195C10.3735 12.04 10.9503 11.8011 11.3757 11.3757C11.801 10.9504 12.04 10.3735 12.04 9.772V4.228C12.04 2.9743 11.0257 1.96 9.77195 1.96H4.22795ZM10.3075 2.905C10.5163 2.905 10.7166 2.98797 10.8643 3.13565C11.012 3.28334 11.095 3.48364 11.095 3.6925C11.095 3.90136 11.012 4.10166 10.8643 4.24935C10.7166 4.39703 10.5163 4.48 10.3075 4.48C10.0986 4.48 9.89829 4.39703 9.7506 4.24935C9.60292 4.10166 9.51995 3.90136 9.51995 3.6925C9.51995 3.48364 9.60292 3.28334 9.7506 3.13565C9.89829 2.98797 10.0986 2.905 10.3075 2.905ZM6.99995 3.85C7.83538 3.85 8.6366 4.18187 9.22734 4.77261C9.81808 5.36335 10.15 6.16457 10.15 7C10.15 7.83543 9.81808 8.63665 9.22734 9.22739C8.6366 9.81813 7.83538 10.15 6.99995 10.15C6.16452 10.15 5.3633 9.81813 4.77256 9.22739C4.18183 8.63665 3.84995 7.83543 3.84995 7C3.84995 6.16457 4.18183 5.36335 4.77256 4.77261C5.3633 4.18187 6.16452 3.85 6.99995 3.85M6.99995 5.11C6.49869 5.11 6.01796 5.30912 5.66352 5.66357C5.30908 6.01801 5.10995 6.49874 5.10995 7C5.10995 7.50126 5.30908 7.98199 5.66352 8.33643C6.01796 8.69088 6.49869 8.89 6.99995 8.89C7.50121 8.89 7.98194 8.69088 8.33638 8.33643C8.69083 7.98199 8.88995 7.50126 8.88995 7C8.88995 6.49874 8.69083 6.01801 8.33638 5.66357C7.98194 5.30912 7.50121 5.11 6.99995 5.11Z" fill="currentColor"></path>
+		</g>
+		<defs>
+			<clippath id="clip0_472_2460"><rect width="14" height="14" fill="currentColor"></rect></clippath>
+		</defs>
+	</symbol>
+	<symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" id="social-tg">
+		<path d="M12.4745 1.59727C12.4745 1.59727 13.6956 1.12112 13.5939 2.27747C13.5599 2.75362 13.2547 4.42012 13.0172 6.22267L12.2032 11.5623C12.2032 11.5623 12.1354 12.3445 11.5248 12.4806C10.9142 12.6166 9.99843 12.0044 9.82881 11.8684C9.69314 11.7664 7.28489 10.2359 6.43689 9.48766C6.19944 9.28359 5.92809 8.87546 6.4708 8.39932L10.0323 4.99831C10.4394 4.59018 10.8464 3.63789 9.15043 4.79425L4.40173 8.02523C4.40173 8.02523 3.85902 8.36532 2.84146 8.05923L0.636692 7.37902C0.636692 7.37902 -0.177374 6.86888 1.21332 6.3587C4.60526 4.76021 8.77734 3.12772 12.4745 1.59727Z" fill="currentColor"></path>
+	</symbol>
+	<symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" id="social-yt">
+		<path fill-rule="evenodd" clip-rule="evenodd" d="M12.4695 2.20154C13.0722 2.36288 13.5459 2.83654 13.7073 3.43927C13.9988 4.53064 14 6.80904 14 6.80904C14 6.80904 14 9.08745 13.7073 10.1788C13.5459 10.7816 13.0722 11.2552 12.4695 11.4165C11.3782 11.7093 6.99997 11.7093 6.99997 11.7093C6.99997 11.7093 2.62183 11.7093 1.53045 11.4165C0.927726 11.2552 0.454066 10.7816 0.292723 10.1788C0 9.08745 0 6.80904 0 6.80904C0 6.80904 0 4.53064 0.292723 3.43927C0.454066 2.83654 0.927726 2.36288 1.53045 2.20154C2.62183 1.90881 6.99997 1.90881 6.99997 1.90881C6.99997 1.90881 11.3782 1.90881 12.4695 2.20154ZM9.23654 6.80962L5.59939 8.90937V4.70984L9.23654 6.80962Z" fill="currentColor"></path>
+	</symbol>
+</svg>
+
+<script src="scripts.js"></script>
+<script src="apply-form.js"></script>
+</body>
+</html>
