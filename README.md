@@ -2,9 +2,7 @@
 
 # Armed Forces of Ukraine — Web Portal
 
-### Roblox RP information and coordination interface
-
-A community-made web portal for an Armed Forces of Ukraine faction within a Roblox RP environment.
+### A community-made web portal for an Armed Forces of Ukraine faction within a Roblox RP environment.
 
 </div>
 
