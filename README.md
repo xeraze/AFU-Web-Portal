@@ -6,11 +6,7 @@
 
 A community-made web portal for an Armed Forces of Ukraine faction within a Roblox RP environment.
 
-[🌐 Live Demo](https://xeraze.github.io/AFU-Web-Portal/) · [💻 Repository](https://github.com/xeraze/AFU-Web-Portal)
-
 </div>
-
----
 
 ## Overview
 
@@ -38,23 +34,15 @@ The project is intentionally built without a heavy frontend framework, keeping t
 
 ```text
 AFU-Web-Portal/
-├── images/         # Visual assets
-├── index.html      # Main portal
-├── scripts.js      # Client-side behaviour
-├── apply-form.js   # Application form logic
-└── styles.css      # Main stylesheet
+├── images/         Visual assets
+├── index.html      Main portal
+├── scripts.js      Client-side behaviour
+├── apply-form.js   Application form logic
+└── styles.css      Main stylesheet
 ```
-
-## Preview
-
-**https://xeraze.github.io/AFU-Web-Portal/**
-
-> This is a community-created Roblox RP project and is not an official government website.
-
----
 
 <div align="center">
 
-Designed and developed by **xeraze**
+Designed and developed by **xeraze** for **"Odessa, Ukraine"**
 
 </div>
