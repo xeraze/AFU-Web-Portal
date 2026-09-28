@@ -4,7 +4,7 @@
 
 ### A community-made web portal for an Armed Forces of Ukraine faction within a Roblox RP environment.
 
-<img src="./images/site-previw.png" alt="Site Preview">
+![Site Preview](images/site-preview.png)
 
 </div>
 
